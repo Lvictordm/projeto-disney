@@ -43,7 +43,7 @@ if racas:
     random.shuffle(opcoes)
 
     if imagem:
-        st.image(imagem, caption="Qual é a raça desse gato?", use_column_width=True)
+        st.image(imagem, caption="Qual é a raça desse gato?"use_container_width==True)
         escolha = st.selectbox("Escolha a raça:", opcoes)
         if st.button("Responder"):
             if escolha == nome_raca_correta:
