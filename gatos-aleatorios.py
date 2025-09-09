@@ -2,10 +2,25 @@ import streamlit as st
 import requests
 import random
 
+st.set_page_config(page_title="Adivinhe o Gato!", page_icon="🐱")
 
-st.title(" adivinhe o gato!")
-st.write("vamos gerar uma imagem de um gato aletorio e voce precisa adivinhar a raça")
+st.title("🐱 Adivinhe a Raça do Gato!")
+st.write("Vamos gerar a imagem de um gato aleatório e você precisa adivinhar a raça correta.")
 
+# Dicionário com traduções (parcial - você pode expandir)
+traducao_racas = {
+    "Abyssinian": "Abissínio",
+    "Bengal": "Bengal",
+    "Birman": "Sagrado da Birmânia",
+    "British Shorthair": "British de pelo curto",
+    "Maine Coon": "Maine Coon",
+    "Persian": "Persa",
+    "Ragdoll": "Ragdoll",
+    "Russian Blue": "Azul Russo",
+    "Siamese": "Siamês",
+    "Sphynx": "Sphynx"
+    # Adicione mais conforme desejar
+}
 
 def buscar_racas():
     url = "https://api.thecatapi.com/v1/breeds"
@@ -23,32 +38,52 @@ def buscar_imagem_raca(raca_id):
             return dados[0]["url"]
     return None
 
-st.title("🐱 Adivinhe a Raça do Gato")
+# Carregar raças (somente uma vez)
+if "racas" not in st.session_state:
+    st.session_state.racas = buscar_racas()
 
+# Sortear desafio (somente uma vez)
+if "desafio" not in st.session_state and st.session_state.racas:
+    raca_correta = random.choice(st.session_state.racas)
+    nome_original = raca_correta["name"]
+    nome_pt = traducao_racas.get(nome_original, nome_original)
+    id_raca = raca_correta["id"]
+    imagem = buscar_imagem_raca(id_raca)
 
-racas = buscar_racas()
-
-
-if racas:
-    raca_correta = random.choice(racas)
-    nome_raca_correta = raca_correta["name"]
-    id_raca_correta = raca_correta["id"]
-    imagem = buscar_imagem_raca(id_raca_correta)
-
-    opcoes = [nome_raca_correta]
+    # Opções aleatórias
+    opcoes = [nome_pt]
     while len(opcoes) < 4:
-        r = random.choice(racas)
-        if r["name"] not in opcoes:
-            opcoes.append(r["name"])
+        r = random.choice(st.session_state.racas)
+        nome_op = traducao_racas.get(r["name"], r["name"])
+        if nome_op not in opcoes:
+            opcoes.append(nome_op)
     random.shuffle(opcoes)
 
-    if imagem:
-        st.image(imagem, caption="Qual é a raça desse gato?", use_column_width=True)
-        escolha = st.selectbox("Escolha a raça:", opcoes)
-        if st.button("Responder"):
-            if escolha == nome_raca_correta:
-                st.success("🎉 Acertou! Essa é a raça correta.")
-            else:
-                st.error(f"❌ Errou! A raça correta era: {nome_raca_correta}")
+    # Armazenar no estado
+    st.session_state.desafio = {
+        "nome_original": nome_original,
+        "nome_pt": nome_pt,
+        "id": id_raca,
+        "imagem": imagem,
+        "opcoes": opcoes
+    }
+
+# Mostrar desafio
+if "desafio" in st.session_state:
+    desafio = st.session_state.desafio
+    st.image(desafio["imagem"], caption="Qual é a raça desse gato?", use_container_width=True)
+
+    escolha = st.selectbox("Escolha a raça:", desafio["opcoes"])
+
+    if st.button("Responder"):
+        if escolha == desafio["nome_pt"]:
+            st.success("🎉 Acertou! Essa é a raça correta.")
+        else:
+            st.error(f"❌ Errou! A raça correta era: {desafio['nome_pt']} ({desafio['nome_original']})")
+
+        # Permitir novo jogo
+        if st.button("Jogar novamente"):
+            del st.session_state.desafio
+            st.experimental_rerun()
 else:
     st.error("Não foi possível carregar as raças de gatos.")
