@@ -5,9 +5,9 @@ import random
 st.set_page_config(page_title="Adivinhe o Gato!", page_icon="🐱")
 
 st.title("🐱 Adivinhe a Raça do Gato!")
-st.write("Vamos gerar a imagem de um gato aleatório e você precisa adivinhar a raça correta.")
+st.write("Vamos gerar imagens de gatos aleatórios e você precisa adivinhar a raça correta.")
 
-# Dicionário com traduções (parcial - você pode expandir)
+# Tradução de algumas raças
 traducao_racas = {
     "Abyssinian": "Abissínio",
     "Bengal": "Bengal",
@@ -19,9 +19,10 @@ traducao_racas = {
     "Russian Blue": "Azul Russo",
     "Siamese": "Siamês",
     "Sphynx": "Sphynx"
-    # Adicione mais conforme desejar
+    # Adicione mais se quiser
 }
 
+# Buscar todas as raças
 def buscar_racas():
     url = "https://api.thecatapi.com/v1/breeds"
     resposta = requests.get(url)
@@ -29,28 +30,28 @@ def buscar_racas():
         return resposta.json()
     return []
 
-def buscar_imagem_raca(raca_id):
-    url = f"https://api.thecatapi.com/v1/images/search?breed_ids={raca_id}"
+# Buscar várias imagens da mesma raça
+def buscar_imagens_raca(raca_id, quantidade=3):
+    url = f"https://api.thecatapi.com/v1/images/search?breed_ids={raca_id}&limit={quantidade}"
     resposta = requests.get(url)
     if resposta.status_code == 200:
         dados = resposta.json()
-        if dados:
-            return dados[0]["url"]
-    return None
+        return [item["url"] for item in dados if "url" in item]
+    return []
 
-# Carregar raças (somente uma vez)
+# Carregar raças apenas uma vez
 if "racas" not in st.session_state:
     st.session_state.racas = buscar_racas()
 
-# Sortear desafio (somente uma vez)
+# Criar novo desafio apenas uma vez
 if "desafio" not in st.session_state and st.session_state.racas:
     raca_correta = random.choice(st.session_state.racas)
     nome_original = raca_correta["name"]
     nome_pt = traducao_racas.get(nome_original, nome_original)
     id_raca = raca_correta["id"]
-    imagem = buscar_imagem_raca(id_raca)
+    imagens = buscar_imagens_raca(id_raca, quantidade=3)  # Pegando 3 imagens
 
-    # Opções aleatórias
+    # Criar opções falsas
     opcoes = [nome_pt]
     while len(opcoes) < 4:
         r = random.choice(st.session_state.racas)
@@ -64,14 +65,19 @@ if "desafio" not in st.session_state and st.session_state.racas:
         "nome_original": nome_original,
         "nome_pt": nome_pt,
         "id": id_raca,
-        "imagem": imagem,
+        "imagens": imagens,
         "opcoes": opcoes
     }
 
 # Mostrar desafio
 if "desafio" in st.session_state:
     desafio = st.session_state.desafio
-    st.image(desafio["imagem"], caption="Qual é a raça desse gato?", use_container_width=True)
+
+    if desafio["imagens"]:
+        st.subheader("Qual é a raça desses gatos?")
+        st.image(desafio["imagens"], use_container_width=True)
+    else:
+        st.warning("Nenhuma imagem disponível para esta raça.")
 
     escolha = st.selectbox("Escolha a raça:", desafio["opcoes"])
 
@@ -81,7 +87,6 @@ if "desafio" in st.session_state:
         else:
             st.error(f"❌ Errou! A raça correta era: {desafio['nome_pt']} ({desafio['nome_original']})")
 
-        # Permitir novo jogo
         if st.button("Jogar novamente"):
             del st.session_state.desafio
             st.experimental_rerun()
