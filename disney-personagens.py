@@ -16,67 +16,67 @@ perguntas = [
         "pergunta": "O que a Fera veste no baile com a Bela?",
         "opcoes": ["Terno azul", "Capa vermelha", "Armadura", "Vestido amarelo"],
         "correta": "Terno azul",
-        "imagem": "https://upload.wikimedia.org/wikipedia/en/f/fd/Beast_disney.png"
+        "imagem": "https://i.pinimg.com/736x/9f/3e/f2/9f3ef2f6ed2b32b6aed48d1917287c55.jpg"
     },
     {
         "pergunta": "O que Ariel mais deseja?",
         "opcoes": ["Viver no mundo humano", "Ser princesa do mar", "Encontrar um gênio", "Aprender a lutar"],
         "correta": "Viver no mundo humano",
-        "imagem": "https://upload.wikimedia.org/wikipedia/en/7/75/Ariel_disney.png"
+        "imagem": "https://www.giraofertas.com.br/wp-content/uploads/2022/10/Ariel-Castle-Disney-Eau-de-Toilette-Infantil-06.jpg"
     },
     {
         "pergunta": "Qual objeto mágico aparece em Aladdin?",
         "opcoes": ["Tapete voador", "Tridente mágico", "Espada encantada", "Coração de Te Fiti"],
         "correta": "Tapete voador",
-        "imagem": "https://upload.wikimedia.org/wikipedia/en/5/58/Aladdin_disney.png"
+        "imagem": ""
     },
     {
         "pergunta": "Quem é o companheiro de Moana em sua jornada?",
         "opcoes": ["Maui", "Sebastião", "Fera", "Rajah"],
         "correta": "Maui",
-        "imagem": "https://upload.wikimedia.org/wikipedia/en/2/26/Moana_disney.png"
+        "imagem": "https://www.shutterstock.com/image-photo/create-amazing-moana-birthday-wallpaper-260nw-2577212925.jpg"
     },
     {
         "pergunta": "Qual é o disfarce de Mulan durante o treinamento?",
         "opcoes": ["Ela se veste como soldado", "Ela vira princesa", "Ela usa vestido mágico", "Ela se disfarça de pirata"],
         "correta": "Ela se veste como soldado",
-        "imagem": "https://upload.wikimedia.org/wikipedia/en/4/4c/Mulan_disney.png"
+        "imagem": "https://rollingstone.com.br/wp-content/uploads/mulan_reprod.jpg"
     },
     {
         "pergunta": "Qual desses itens representa melhor a Moana?",
         "opcoes": ["Oceano e canoa", "Espelho mágico", "Tridente do mar", "Espada e dragão"],
         "correta": "Oceano e canoa",
-        "imagem": "https://upload.wikimedia.org/wikipedia/en/2/26/Moana_disney.png"
+        "imagem": "https://lumiere-a.akamaihd.net/v1/images/g_moana_09_17699_064f5500_2f9ff275.jpeg"
     },
     {
         "pergunta": "Qual o nome do vilão de A Bela e a Fera?",
         "opcoes": ["Gaston", "Úrsula", "Jafar", "Malévola"],
         "correta": "Gaston",
-        "imagem": "https://upload.wikimedia.org/wikipedia/en/9/99/Gaston_disney.png"
+        "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6BaPBq6NNdaYaoypkkPC3knT77xgEz9axww&s"
     },
     {
         "pergunta": "O que Sebastian representa em A Pequena Sereia?",
         "opcoes": ["Um conselheiro real", "Um peixe curioso", "Um tritão inimigo", "Um pássaro maluco"],
         "correta": "Um conselheiro real",
-        "imagem": "https://upload.wikimedia.org/wikipedia/en/5/5e/Sebastian_the_crab.png"
+        "imagem": "https://recreio.com.br/wp-content/uploads/disney/sebastiao_capa.png"
     },
     {
         "pergunta": "Qual desses personagens é um semideus?",
         "opcoes": ["Maui", "Simba", "Hércules", "Buzz Lightyear"],
         "correta": "Maui",
-        "imagem": "https://upload.wikimedia.org/wikipedia/en/e/e4/Maui_disney.png"
+        "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu-myWZLYaaadxdU5p8K78C6a0blbRC-82FA&s"
     },
     {
         "pergunta": "Qual é o animal companheiro da Mulan?",
         "opcoes": ["Um dragão", "Um tigre", "Um macaco", "Um cachorro"],
         "correta": "Um dragão",
-        "imagem": "https://upload.wikimedia.org/wikipedia/en/2/23/Mushu_disney.png"
+        "imagem": "https://i0.wp.com/cromossomonerd.com.br/wp-content/uploads/2016/10/imagem-destacada-mulan.png?fit=1068%2C600&ssl=1"
     },
     {
         "pergunta": "Qual o presente que a Fera dá para Bela que a encanta?",
         "opcoes": ["Uma biblioteca", "Um espelho mágico", "Um vestido encantado", "Uma rosa mágica"],
         "correta": "Uma biblioteca",
-        "imagem": "https://upload.wikimedia.org/wikipedia/en/7/7c/Beautybeastposter.jpg"
+        "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlwfC-DZMR5qZQQq9HGtguVxub1skd9KAe6Q&s"
     }
 ]
 
