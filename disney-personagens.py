@@ -88,7 +88,7 @@ if "verificado" not in st.session_state:
 
 for i, p in enumerate(perguntas):
     if len(st.session_state.respostas) <= i:
-        st.image(p["imagem"], width=250)
+        st.image(p["imagem"], width=500)
         escolha = st.radio(p["pergunta"], p["opcoes"], key=f"q{i}")
         if st.button(f"Confirmar resposta {i+1}"):
             st.session_state.respostas.append(escolha)
