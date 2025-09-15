@@ -1,59 +1,85 @@
 import streamlit as st
 from collections import Counter
 
-st.set_page_config(page_title="Qual Personagem da Disney é Você?", page_icon="🎭")
+st.set_page_config(page_title="Qual Filme da Disney combina com você?", page_icon="🎥")
 
-st.title("🎭 Qual Personagem da Disney é Você?")
-st.write("Responda às perguntas e descubra qual personagem da Disney mais combina com você!")
+st.title("🎥 Qual Filme da Disney combina com você?")
+st.write("Responda às perguntas sobre os filmes e descubra qual universo da Disney tem mais a ver com você!")
 
+# Perguntas baseadas em história e características dos filmes
 perguntas = [
     {
-        "pergunta": "Qual dessas qualidades mais te define?",
+        "pergunta": "Quem é o vilão no filme Aladdin?",
         "opcoes": {
-            "Corajoso(a)": "Mulan",
-            "Sonhador(a)": "Ariel",
-            "Líder nato(a)": "Simba",
-            "Independente": "Elsa",
-            "Aventureiro(a)": "Buzz Lightyear",
+            "Jafar": "Aladdin",
+            "Hades": "Hércules",
+            "Gaston": "A Bela e a Fera",
+            "Úrsula": "A Pequena Sereia"
         }
     },
     {
-        "pergunta": "O que você prefere fazer no tempo livre?",
+        "pergunta": "O que a Fera veste no baile com a Bela?",
         "opcoes": {
-            "Explorar lugares novos": "Buzz Lightyear",
-            "Cantar ou dançar": "Ariel",
-            "Ficar sozinho(a) e refletir": "Elsa",
-            "Proteger quem você ama": "Mulan",
-            "Brincar com amigos": "Simba",
+            "Terno azul": "A Bela e a Fera",
+            "Capa vermelha": "Aladdin",
+            "Armadura": "Mulan",
+            "Vestido amarelo": "A Pequena Sereia"
         }
     },
     {
-        "pergunta": "Qual cor você mais gosta?",
+        "pergunta": "O que Ariel mais deseja?",
         "opcoes": {
-            "Azul": "Elsa",
-            "Vermelho": "Mulan",
-            "Amarelo": "Simba",
-            "Turquesa": "Ariel",
-            "Prata": "Buzz Lightyear",
+            "Viver no mundo humano": "A Pequena Sereia",
+            "Ser princesa do mar": "Moana",
+            "Encontrar um gênio": "Aladdin",
+            "Aprender a lutar": "Mulan"
         }
     },
     {
-        "pergunta": "Se você tivesse um poder mágico, qual seria?",
+        "pergunta": "Qual objeto mágico aparece em Aladdin?",
         "opcoes": {
-            "Controlar o gelo": "Elsa",
-            "Respirar debaixo d'água": "Ariel",
-            "Transformação": "Mulan",
-            "Voar pelo espaço": "Buzz Lightyear",
-            "Liderar e proteger": "Simba",
+            "Tapete voador": "Aladdin",
+            "Tridente mágico": "A Pequena Sereia",
+            "Espada encantada": "Mulan",
+            "Coração de Te Fiti": "Moana"
+        }
+    },
+    {
+        "pergunta": "Quem é o companheiro de Moana em sua jornada?",
+        "opcoes": {
+            "Maui": "Moana",
+            "Sebastião": "A Pequena Sereia",
+            "Fera": "A Bela e a Fera",
+            "Rajah": "Aladdin"
+        }
+    },
+    {
+        "pergunta": "Qual é o disfarce de Mulan durante o treinamento?",
+        "opcoes": {
+            "Ela se veste como soldado": "Mulan",
+            "Ela vira princesa": "A Bela e a Fera",
+            "Ela usa vestido mágico": "A Pequena Sereia",
+            "Ela se disfarça de pirata": "Moana"
+        }
+    },
+    {
+        "pergunta": "Qual desses itens representa melhor a Moana?",
+        "opcoes": {
+            "Oceano e canoa": "Moana",
+            "Espelho mágico": "A Bela e a Fera",
+            "Tridente do mar": "A Pequena Sereia",
+            "Espada e dragão": "Mulan"
         }
     }
 ]
 
+# Estados
 if "respostas" not in st.session_state:
     st.session_state.respostas = []
-if "personagem_final" not in st.session_state:
-    st.session_state.personagem_final = None
+if "filme_final" not in st.session_state:
+    st.session_state.filme_final = None
 
+# Apresenta perguntas
 for i, p in enumerate(perguntas):
     if len(st.session_state.respostas) <= i:
         escolha = st.radio(p["pergunta"], list(p["opcoes"].keys()), key=f"q{i}")
@@ -61,29 +87,31 @@ for i, p in enumerate(perguntas):
             st.session_state.respostas.append(p["opcoes"][escolha])
         st.stop()
 
+# Resultado
 if len(st.session_state.respostas) == len(perguntas):
     contagem = Counter(st.session_state.respostas)
-    personagem = contagem.most_common(1)[0][0]
-    st.session_state.personagem_final = personagem
+    filme = contagem.most_common(1)[0][0]
+    st.session_state.filme_final = filme
 
-if st.session_state.personagem_final:
-    st.success(f"🎉 Você seria o personagem **{st.session_state.personagem_final}** da Disney!")
+# Exibir resultado
+if st.session_state.filme_final:
+    st.success(f"🎉 O filme da Disney que mais combina com você é **{st.session_state.filme_final}**!")
 
     imagens = {
-        "Elsa": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3e/Elsa_Frozen.png/220px-Elsa_Frozen.png",
-        "Simba": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3d/Simba_Pride_Lands.png/220px-Simba_Pride_Lands.png",
-        "Buzz Lightyear": "https://upload.wikimedia.org/wikipedia/en/thumb/9/9f/BuzzLightyear2.png/220px-BuzzLightyear2.png",
-        "Mulan": "https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Mulan_%28Disney_character%29.png/220px-Mulan_%28Disney_character%29.png",
-        "Ariel": "https://upload.wikimedia.org/wikipedia/en/thumb/6/69/Ariel_disney.png/220px-Ariel_disney.png"
+        "Aladdin": "https://upload.wikimedia.org/wikipedia/en/5/58/Aladdin_disney.png",
+        "A Bela e a Fera": "https://upload.wikimedia.org/wikipedia/en/7/7c/Beautybeastposter.jpg",
+        "A Pequena Sereia": "https://upload.wikimedia.org/wikipedia/en/7/75/Ariel_disney.png",
+        "Moana": "https://upload.wikimedia.org/wikipedia/en/2/26/Moana_disney.png",
+        "Mulan": "https://upload.wikimedia.org/wikipedia/en/4/4c/Mulan_disney.png"
     }
 
-    url = imagens.get(st.session_state.personagem_final)
+    url = imagens.get(st.session_state.filme_final)
     if url:
-        st.image(url, caption=st.session_state.personagem_final, use_container_width=True)
+        st.image(url, caption=st.session_state.filme_final, use_container_width=True)
     else:
-        st.write("Imagem do personagem não disponível.")
+        st.warning("Imagem do filme não disponível.")
 
     if st.button("Refazer o teste 🔁"):
         st.session_state.respostas = []
-        st.session_state.personagem_final = None
+        st.session_state.filme_final = None
         st.experimental_rerun()
