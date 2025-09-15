@@ -1,9 +1,4 @@
 import streamlit as st
-import requests
-
-response = requests.get('https://disneyapi.dev/characters')
-data = response.json()
-# daí você pode extrair personagens, imagens etc dinamicamente
 
 st.set_page_config(page_title="Quiz Disney - Pontuação", page_icon="🎯")
 
