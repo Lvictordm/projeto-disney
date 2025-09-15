@@ -39,18 +39,48 @@ perguntas = [
         }
     },
     {
-        "pergunta": "Qual dessas frases mais combina com você?",
+        "pergunta": "Qual dessas atividades você mais gosta?",
         "opcoes": {
-            '"Ao infinito e além!"': "Buzz Lightyear",
-            '"O amor é uma porta aberta."': "Elsa",
-            '"Hakuna Matata!"': "Simba",
-            '"Eu quero ser onde o povo está."': "Ariel",
-            '"A coragem é o que nos define."': "Mulan",
-            '"O oceano me chama."': "Moana",
-            '"Nunca deixe de sonhar."': "Tiana",
-            '"Você tem um amigo em mim."': "Woody",
-            '"Nunca cresça!"': "Peter Pan",
-            '"A vida começa quando meus sonhos começam."': "Rapunzel"
+            "Cozinhar ou experimentar comidas": "Tiana",
+            "Viajar para lugares distantes": "Moana",
+            "Liderar e tomar decisões": "Simba",
+            "Desenhar, pintar ou criar": "Rapunzel",
+            "Ficar perto da natureza": "Ariel",
+            "Brincar ou rir com os amigos": "Woody",
+            "Desafiar os próprios limites": "Mulan",
+            "Sonhar com outros mundos": "Peter Pan",
+            "Cuidar do que é importante para mim": "Elsa",
+            "Explorar o desconhecido": "Buzz Lightyear"
+        }
+    },
+    {
+        "pergunta": "Qual cor você mais gosta?",
+        "opcoes": {
+            "Azul": "Elsa",
+            "Vermelho": "Mulan",
+            "Amarelo": "Simba",
+            "Roxo": "Buzz Lightyear",
+            "Verde": "Tiana",
+            "Rosa": "Rapunzel",
+            "Laranja": "Moana",
+            "Branco": "Woody",
+            "Turquesa": "Ariel",
+            "Dourado": "Peter Pan"
+        }
+    },
+    {
+        "pergunta": "Com qual animal você mais se identifica?",
+        "opcoes": {
+            "Leão": "Simba",
+            "Peixe": "Ariel",
+            "Pássaro": "Peter Pan",
+            "Rena ou animal do gelo": "Elsa",
+            "Dragão": "Mulan",
+            "Cavalo": "Woody",
+            "Tartaruga do mar": "Moana",
+            "Camaleão ou animal curioso": "Rapunzel",
+            "Abelha ou formiga trabalhadora": "Tiana",
+            "Animal do espaço (tipo alien ou robô)": "Buzz Lightyear"
         }
     },
     {
@@ -95,16 +125,16 @@ if st.session_state.personagem_final:
     st.success(f"🎉 Você seria o personagem **{st.session_state.personagem_final}** da Disney!")
 
     imagens = {
-        "Elsa": "https://lumiere-a.akamaihd.net/v1/images/elsa_frozen2_b4e5d185.jpeg",
-        "Simba": "https://lumiere-a.akamaihd.net/v1/images/open-uri20150422-20810-1t9up3l_4ffdc51d.jpeg",
-        "Buzz Lightyear": "https://lumiere-a.akamaihd.net/v1/images/open-uri20150622-20810-19nh3dz_3173f790.jpeg",
-        "Mulan": "https://lumiere-a.akamaihd.net/v1/images/pp_mulan_herobanner_mobile_19751_7b32b3d8.jpeg",
-        "Ariel": "https://lumiere-a.akamaihd.net/v1/images/ariel_7d861cb0.jpeg",
-        "Moana": "https://lumiere-a.akamaihd.net/v1/images/open-uri20160824-19296-1hmlmt1_2b0f3e1d.jpeg",
-        "Woody": "https://lumiere-a.akamaihd.net/v1/images/woody_59a25f8f.jpeg",
-        "Tiana": "https://lumiere-a.akamaihd.net/v1/images/pp_princessandthefrog_herobanner_mobile_19752_e278e9f7.jpeg",
-        "Peter Pan": "https://lumiere-a.akamaihd.net/v1/images/pp_peterpan_herobanner_mobile_19744_927d0d1b.jpeg",
-        "Rapunzel": "https://lumiere-a.akamaihd.net/v1/images/pp_tangled_herobanner_mobile_19755_3f45675f.jpeg"
+        "Elsa": "https://upload.wikimedia.org/wikipedia/en/e/e0/Elsa_(Frozen).png",
+        "Simba": "https://upload.wikimedia.org/wikipedia/en/9/9d/YoungSimba.png",
+        "Buzz Lightyear": "https://upload.wikimedia.org/wikipedia/en/2/29/Buzz_Lightyear.png",
+        "Mulan": "https://upload.wikimedia.org/wikipedia/en/4/4c/Mulan_disney.png",
+        "Ariel": "https://upload.wikimedia.org/wikipedia/en/7/75/Ariel_disney.png",
+        "Moana": "https://upload.wikimedia.org/wikipedia/en/2/26/Moana_disney.png",
+        "Woody": "https://upload.wikimedia.org/wikipedia/en/0/01/Woody_Woodpecker.png",
+        "Tiana": "https://upload.wikimedia.org/wikipedia/en/8/80/Tiana_disney.png",
+        "Peter Pan": "https://upload.wikimedia.org/wikipedia/en/d/d1/Peter_Pan_disney.png",
+        "Rapunzel": "https://upload.wikimedia.org/wikipedia/en/a/a4/Rapunzel_disney.png"
     }
 
     if personagem in imagens:
