@@ -9,44 +9,41 @@ st.write("Responda às perguntas e veja sua pontuação no final!")
 
 API_URL = "https://api.disneyapi.dev/character"
 
-def carregar_personagens(pagina=1, limite=100):
-    try:
-        response = requests.get(f"{API_URL}?page={pagina}&limit={limite}")
-        response.raise_for_status()
-        data = response.json()
-        personagens = data.get("data", [])
-        if not personagens:
-            st.error("Nenhum personagem encontrado na API.")
-            return []
-        return personagens
-    except Exception as e:
-        st.error(f"Erro ao acessar a API da Disney: {e}")
-        return []
+def carregar_todos_personagens(max_personagens=100):
+    personagens = []
+    pagina = 1
+    while len(personagens) < max_personagens:
+        try:
+            response = requests.get(f"{API_URL}?page={pagina}")
+            response.raise_for_status()
+            data = response.json()
+            pagina_personagens = data.get("data", [])
+            if not pagina_personagens:
+                break  # Sem mais personagens
+            personagens.extend(pagina_personagens)
+            if not data.get("nextPage"):
+                break  # Não tem próxima página
+            pagina += 1
+        except Exception as e:
+            st.error(f"Erro ao acessar a API da Disney: {e}")
+            break
+    return personagens[:max_personagens]
 
-# Carrega personagens
-todos_personagens = carregar_personagens()
+# Carrega personagens (até 100)
+todos_personagens = carregar_todos_personagens(max_personagens=100)
 
-# Verifica se tem personagens suficientes
 if len(todos_personagens) < 10:
     st.error("Não foi possível carregar personagens suficientes para o quiz.")
     st.stop()
 
-# Escolhe 10 personagens aleatórios para o quiz
 quiz_personagens = random.sample(todos_personagens, 10)
 
-# Preparar perguntas no formato:
-# "Qual o nome desse personagem?"
-# opções = nome correto + 3 nomes errados aleatórios
+todos_nomes = [p['name'] for p in todos_personagens]
 
 perguntas = []
 
-# Para criar opções erradas, vamos coletar nomes de personagens diferentes
-todos_nomes = [p['name'] for p in todos_personagens]
-
 for personagem in quiz_personagens:
     correta = personagem['name']
-
-    # Escolhe 3 nomes errados que não sejam o correto
     opcoes_erradas = random.sample([n for n in todos_nomes if n != correta], 3)
     opcoes = opcoes_erradas + [correta]
     random.shuffle(opcoes)
@@ -58,13 +55,11 @@ for personagem in quiz_personagens:
         "opcoes": opcoes
     })
 
-# Controle de estado para respostas e verificação
 if "respostas" not in st.session_state:
     st.session_state.respostas = []
 if "verificado" not in st.session_state:
     st.session_state.verificado = False
 
-# Loop para perguntas
 for i, p in enumerate(perguntas):
     if len(st.session_state.respostas) <= i:
         if p["imagem"]:
@@ -74,7 +69,6 @@ for i, p in enumerate(perguntas):
             st.session_state.respostas.append(escolha)
         st.stop()
 
-# Avaliação das respostas
 if len(st.session_state.respostas) == len(perguntas) and not st.session_state.verificado:
     acertos = 0
     for idx, p in enumerate(perguntas):
@@ -84,7 +78,6 @@ if len(st.session_state.respostas) == len(perguntas) and not st.session_state.ve
     st.session_state.erros = len(perguntas) - acertos
     st.session_state.verificado = True
 
-# Mostrar resultado final
 if st.session_state.verificado:
     st.markdown("## ✅ Resultado Final:")
     st.success(f"Você acertou {st.session_state.acertos} de {len(perguntas)} perguntas!")
