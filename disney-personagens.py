@@ -56,16 +56,28 @@ def personagem_aleatorio(dificuldade=0):
 
     return personagem
 
-# Função para gerar opções com 1 certa e 3 erradas
-def gerar_opcoes(nome_correto, todos_personagens):
+# Função para gerar opções com 1 certa e 3 erradas, com personagens mais semelhantes
+def gerar_opcoes(nome_correto, todos_personagens, personagem_atual):
     opcoes = [nome_correto]
     nomes_usados = set(opcoes)
+
+    # Buscar personagens semelhantes (usando nome ou algo relacionado)
+    for p in todos_personagens:
+        nome = p.get("name", "")
+        if nome and nome != personagem_atual["name"] and nome not in nomes_usados:
+            # Verificar semelhança nos nomes
+            if personagem_atual["name"].lower() in nome.lower():
+                opcoes.append(nome)
+                nomes_usados.add(nome)
+
+    # Caso não tenha opções semelhantes, adicionar aleatórias
     while len(opcoes) < 4:
         p = random.choice(todos_personagens)
         nome = p.get("name", "")
         if nome and nome not in nomes_usados:
             opcoes.append(nome)
             nomes_usados.add(nome)
+
     random.shuffle(opcoes)
     return opcoes
 
@@ -78,7 +90,7 @@ if "personagem_atual" not in st.session_state:
     st.session_state.personagem_atual = personagem_aleatorio(st.session_state.acertos)
 if "opcoes" not in st.session_state:
     todos = buscar_personagens()
-    st.session_state.opcoes = gerar_opcoes(st.session_state.personagem_atual["name"], todos)
+    st.session_state.opcoes = gerar_opcoes(st.session_state.personagem_atual["name"], todos, st.session_state.personagem_atual)
 if "respondido" not in st.session_state:
     st.session_state.respondido = False
 
@@ -105,5 +117,5 @@ if st.session_state.respondido:
     if st.button("Próximo personagem 🎲"):
         st.session_state.personagem_atual = personagem_aleatorio(st.session_state.acertos)
         todos = buscar_personagens()
-        st.session_state.opcoes = gerar_opcoes(st.session_state.personagem_atual["name"], todos)
+        st.session_state.opcoes = gerar_opcoes(st.session_state.personagem_atual["name"], todos, st.session_state.personagem_atual)
         st.session_state.respondido = False
