@@ -49,7 +49,7 @@ perguntas = [
         "imagem": "https://lumiere-a.akamaihd.net/v1/images/g_moana_09_17699_064f5500_2f9ff275.jpeg"
     },
     {
-        "titulo": "EM bla bla"
+        "titulo": "EM bla bla",
         "pergunta": "Qual o nome do vilão de A Bela e a Fera?",
         "opcoes": ["Muzan", "Úrsulo", "Jafar", "Gaston"],
         "correta": "Gaston",
