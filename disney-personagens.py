@@ -70,7 +70,7 @@ perguntas = [
         "pergunta": "Qual é o animal companheiro da Mulan?",
         "opcoes": ["Um Cachorro caramelo", "Um tigre", "Um macaco", "Um dragão"],
         "correta": "Um dragão",
-        "imagem": "https://i0.wp.com/cromossomonerd.com.br/wp-content/uploads/2016/10/imagem-destacada-mulan.png?fit=1068%2C600&ssl=1"
+        "imagem": "https://i.pinimg.com/736x/f3/90/b9/f390b9416807c72144fecd71369063f9.jpg"
     },
     {
         "pergunta": "Qual o presente que a Fera dá para Bela que a encanta?",
