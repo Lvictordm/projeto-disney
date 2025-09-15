@@ -2,35 +2,37 @@ import streamlit as st
 import requests
 import random
 
-st.set_page_config(page_title="Quiz Disney - Personagens", page_icon="🎯")
+st.set_page_config(page_title="Quiz Disney - Personagens Famosos", page_icon="🎯")
 
 st.title("🎯 Quiz Disney: Quem é esse personagem?")
 st.write("Responda às perguntas e veja sua pontuação no final!")
 
 API_URL = "https://api.disneyapi.dev/character"
 
-def carregar_todos_personagens(max_personagens=100):
+# Lista de personagens conhecidos
+personagens_famosos = [
+    "Mickey Mouse", "Donald Duck", "Goofy", "Minnie Mouse", "Pluto", 
+    "Ariel", "Simba", "Aladdin", "Jasmine", "Hercules", 
+    "Buzz Lightyear", "Woody", "Elsa", "Anna", "Olaf", "Moana",
+    "Rapunzel", "Cinderella", "Belle", "Beast", "Maleficent"
+]
+
+def carregar_personagens_famosos():
     personagens = []
-    pagina = 1
-    while len(personagens) < max_personagens:
+    for nome in personagens_famosos:
         try:
-            response = requests.get(f"{API_URL}?page={pagina}")
+            response = requests.get(f"{API_URL}?name={nome}")
             response.raise_for_status()
             data = response.json()
-            pagina_personagens = data.get("data", [])
-            if not pagina_personagens:
-                break  # Sem mais personagens
-            personagens.extend(pagina_personagens)
-            if not data.get("nextPage"):
-                break  # Não tem próxima página
-            pagina += 1
+            personagem = data.get("data", [])
+            if personagem:
+                personagens.extend(personagem)
         except Exception as e:
             st.error(f"Erro ao acessar a API da Disney: {e}")
-            break
-    return personagens[:max_personagens]
+    return personagens
 
-# Carrega personagens (até 100)
-todos_personagens = carregar_todos_personagens(max_personagens=100)
+# Carrega personagens mais conhecidos
+todos_personagens = carregar_personagens_famosos()
 
 if len(todos_personagens) < 10:
     st.error("Não foi possível carregar personagens suficientes para o quiz.")
@@ -38,13 +40,11 @@ if len(todos_personagens) < 10:
 
 quiz_personagens = random.sample(todos_personagens, 10)
 
-todos_nomes = [p['name'] for p in todos_personagens]
-
 perguntas = []
 
 for personagem in quiz_personagens:
     correta = personagem['name']
-    opcoes_erradas = random.sample([n for n in todos_nomes if n != correta], 3)
+    opcoes_erradas = random.sample([p['name'] for p in todos_personagens if p['name'] != correta], 3)
     opcoes = opcoes_erradas + [correta]
     random.shuffle(opcoes)
 
