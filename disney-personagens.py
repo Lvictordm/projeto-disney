@@ -1,109 +1,39 @@
 import streamlit as st
 import requests
-import random
 
-st.set_page_config(page_title="Quiz Disney - Personagens Famosos", page_icon="🎯")
-
-st.title("🎯 Quiz Disney: Quem é esse personagem?")
-st.write("Responda às perguntas e veja sua pontuação no final!")
-
+# Definir a URL da API
 API_URL = "https://api.disneyapi.dev/character"
 
-# Lista de personagens conhecidos
-personagens_famosos = [
-    "Mickey Mouse", "Donald Duck", "Goofy", "Minnie Mouse", "Pluto", 
-    "Ariel", "Simba", "Aladdin", "Jasmine", "Hercules", 
-    "Buzz Lightyear", "Woody", "Elsa", "Anna", "Olaf", "Moana",
-    "Rapunzel", "Cinderella", "Belle", "Beast", "Maleficent"
-]
+# Função para pegar os personagens da API
+def carregar_personagens():
+    try:
+        response = requests.get(API_URL)
+        response.raise_for_status()  # Verifica se houve erro na requisição
+        return response.json().get('data', [])
+    except requests.exceptions.RequestException as e:
+        st.error(f"Erro ao acessar a API: {e}")
+        return []
 
-# Função para carregar os personagens mais conhecidos
-def carregar_personagens_famosos():
-    personagens = []
-    for nome in personagens_famosos:
-        try:
-            # Consulta à API para buscar o personagem pelo nome
-            response = requests.get(f"{API_URL}?name={nome}")
-            response.raise_for_status()
-            data = response.json()
-            personagem = data.get("data", [])
-            if personagem:
-                personagens.extend(personagem)
-        except Exception as e:
-            st.error(f"Erro ao acessar a API da Disney: {e}")
-    return personagens
+# Carregar personagens
+personagens = carregar_personagens()
 
-# Carrega os personagens mais conhecidos
-todos_personagens = carregar_personagens_famosos()
+# Verificar se a lista de personagens foi carregada
+if len(personagens) == 0:
+    st.error("Não foi possível carregar os personagens da Disney.")
+else:
+    # Exibir lista de personagens
+    st.title("🌟 Personagens Disney")
+    st.write("Aqui estão alguns personagens da Disney que você pode conhecer!")
 
-# Verifica se conseguimos carregar o número suficiente de personagens
-if len(todos_personagens) < 10:
-    st.error("Não foi possível carregar personagens suficientes para o quiz.")
-    st.stop()
-
-# Seleciona 10 personagens aleatórios para o quiz
-quiz_personagens = random.sample(todos_personagens, 10)
-
-perguntas = []
-
-# Criando as perguntas para o quiz
-for personagem in quiz_personagens:
-    correta = personagem['name']
-    
-    # Garantir que existam pelo menos 3 opções erradas
-    opcoes_erradas = [p['name'] for p in todos_personagens if p['name'] != correta]
-    
-    if len(opcoes_erradas) < 3:
-        st.error("Não há opções erradas suficientes para gerar o quiz.")
-        st.stop()
-    
-    opcoes_erradas = random.sample(opcoes_erradas, 3)
-    
-    # Adiciona a resposta correta às opções e embaralha
-    opcoes = opcoes_erradas + [correta]
-    random.shuffle(opcoes)  # Embaralha as opções para cada pergunta
-
-    perguntas.append({
-        "pergunta": "Qual o nome deste personagem?",
-        "imagem": personagem.get("imageUrl", ""),
-        "correta": correta,
-        "opcoes": opcoes
-    })
-
-# Verifica se já existe um estado para as respostas
-if "respostas" not in st.session_state:
-    st.session_state.respostas = []
-if "verificado" not in st.session_state:
-    st.session_state.verificado = False
-
-# Exibe as perguntas para o usuário
-for i, p in enumerate(perguntas):
-    if len(st.session_state.respostas) <= i:
-        if p["imagem"]:
-            st.image(p["imagem"], width=300)
-        escolha = st.radio(p["pergunta"], p["opcoes"], key=f"q{i}")
-        if st.button(f"Confirmar resposta {i+1}"):
-            st.session_state.respostas.append(escolha)
-        st.stop()  # Aguarda até o usuário confirmar a resposta
-
-# Após o usuário ter respondido todas as perguntas
-if len(st.session_state.respostas) == len(perguntas) and not st.session_state.verificado:
-    acertos = 0
-    for idx, p in enumerate(perguntas):
-        if st.session_state.respostas[idx] == p["correta"]:
-            acertos += 1
-    st.session_state.acertos = acertos
-    st.session_state.erros = len(perguntas) - acertos
-    st.session_state.verificado = True
-
-# Exibe o resultado final após as respostas serem verificadas
-if st.session_state.verificado:
-    st.markdown("## ✅ Resultado Final:")
-    st.success(f"Você acertou {st.session_state.acertos} de {len(perguntas)} perguntas!")
-    st.error(f"Você errou {st.session_state.erros} perguntas.")
-    st.markdown(f"### 🎯 Pontuação final: **{st.session_state.acertos * 10} pontos**")
-
-    if st.button("Jogar novamente 🔁"):
-        st.session_state.respostas = []
-        st.session_state.verificado = False
-        st.experimental_rerun()  # Reinicia o quiz
+    for personagem in personagens:
+        # Mostrar as informações de cada personagem
+        nome = personagem.get('name', 'Desconhecido')
+        imagem_url = personagem.get('imageUrl', '')
+        descricao = personagem.get('description', 'Descrição não disponível.')
+        
+        # Exibir as informações de cada personagem
+        st.subheader(nome)
+        if imagem_url:
+            st.image(imagem_url, caption=nome, use_column_width=True)
+        st.write(f"**Descrição:** {descricao}")
+        st.write("---")
