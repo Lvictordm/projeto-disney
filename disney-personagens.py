@@ -49,7 +49,6 @@ perguntas = [
         "imagem": "https://lumiere-a.akamaihd.net/v1/images/g_moana_09_17699_064f5500_2f9ff275.jpeg"
     },
     {
-        "titulo": "EM bla bla",
         "pergunta": "Qual o nome do vilão de A Bela e a Fera?",
         "opcoes": ["Muzan", "Úrsulo", "Jafar", "Gaston"],
         "correta": "Gaston",
@@ -65,7 +64,7 @@ perguntas = [
         "pergunta": "Qual desses personagens é um semideus?",
         "opcoes": ["Maui", "Simba", "Hércules", "Buzz Lightyear"],
         "correta": "Maui",
-        "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu-myWZLYaaadxdU5p8K78C6a0blbRC-82FA&s"
+        "imagem": "https://pbs.twimg.com/media/GonaheKW8AAhKNY.jpg"
     },
     {
         "pergunta": "Qual é o animal companheiro da Mulan?",
