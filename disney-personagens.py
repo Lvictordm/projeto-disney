@@ -46,7 +46,7 @@ perguntas = [
         "pergunta": "Qual desses itens representa melhor a Moana?",
         "opcoes": ["Oceano e canoa", "concha e areia", "Tridente do mar", "Barco de familia"],
         "correta": "Oceano e canoa",
-        "imagem": "https://lumiere-a.akamaihd.net/v1/images/g_moana_09_17699_064f5500_2f9ff275.jpeg"
+        "imagem": "https://i.pinimg.com/736x/d3/8c/37/d38c37da2fe4945ab57658adcfa3f540.jpg"
     },
     {
         "pergunta": "Qual o nome do vilão de A Bela e a Fera?",
