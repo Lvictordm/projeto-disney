@@ -81,4 +81,4 @@ if st.session_state.verificado:
     if st.button("Refazer o quiz 🔁"):
         st.session_state.respostas = []
         st.session_state.verificado = False
-        st.experimental_rerun()
+        st.rerun()
