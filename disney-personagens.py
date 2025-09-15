@@ -10,7 +10,7 @@ perguntas = [
         "pergunta": "Quem é o vilão no filme Aladdin?",
         "opcoes": ["Gaston", "Hades", "Jafar", "Úrsula"],
         "correta": "Jafar",
-        "imagem": "https://imagem.natelinha.uol.com.br/original/Aladdin_88759a66acb08b6f9d2b3f3a411492538d613179.jpeg"
+        "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbl4nSn_3XZ6YowOeiqYokA10IzZ3Fvu67fA&s"
     },
     {
         "pergunta": "O que a Fera veste no baile com a Bela?",
