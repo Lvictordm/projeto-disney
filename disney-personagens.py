@@ -8,55 +8,55 @@ st.write("Responda às perguntas e veja sua pontuação no final!")
 perguntas = [
     {
         "pergunta": "Quem é o vilão no filme Aladdin?",
-        "opcoes": ["Jafar", "Hades", "Gaston", "Úrsula"],
+        "opcoes": ["Gaston", "Hades", "Jafar", "Úrsula"],
         "correta": "Jafar",
         "imagem": "https://imagem.natelinha.uol.com.br/original/Aladdin_88759a66acb08b6f9d2b3f3a411492538d613179.jpeg"
     },
     {
         "pergunta": "O que a Fera veste no baile com a Bela?",
-        "opcoes": ["Terno azul", "Capa vermelha", "Armadura", "Vestido amarelo"],
+        "opcoes": ["Terno roxo", "Capa vermelha", "Armadura", "Terno azul"],
         "correta": "Terno azul",
         "imagem": "https://i.pinimg.com/736x/9f/3e/f2/9f3ef2f6ed2b32b6aed48d1917287c55.jpg"
     },
     {
         "pergunta": "O que Ariel mais deseja?",
-        "opcoes": ["Viver no mundo humano", "Ser princesa do mar", "Encontrar um gênio", "Aprender a lutar"],
+        "opcoes": ["Aprender a dirigir", "Ser princesa do mar", "ser um hokage", "Viver no mundo humano"],
         "correta": "Viver no mundo humano",
         "imagem": "https://www.giraofertas.com.br/wp-content/uploads/2022/10/Ariel-Castle-Disney-Eau-de-Toilette-Infantil-06.jpg"
     },
     {
         "pergunta": "Qual objeto mágico aparece em Aladdin?",
-        "opcoes": ["Tapete voador", "Tridente mágico", "Espada encantada", "Coração de Te Fiti"],
+        "opcoes": ["Lupa", "Tridente mágico", "Tapete voador", "Coração de Te Fiti"],
         "correta": "Tapete voador",
         "imagem": "https://www.hollywoodreporter.com/wp-content/uploads/2018/07/aladdin_still.jpg?w=1296&h=730&crop=1"
     },
     {
         "pergunta": "Quem é o companheiro de Moana em sua jornada?",
-        "opcoes": ["Maui", "Sebastião", "Fera", "Rajah"],
+        "opcoes": ["Nobru", "Sebastião", "Maui", "Rajah"],
         "correta": "Maui",
         "imagem": "https://www.shutterstock.com/image-photo/create-amazing-moana-birthday-wallpaper-260nw-2577212925.jpg"
     },
     {
         "pergunta": "Qual é o disfarce de Mulan durante o treinamento?",
-        "opcoes": ["Ela se veste como soldado", "Ela vira princesa", "Ela usa vestido mágico", "Ela se disfarça de pirata"],
+        "opcoes": ["Ela usa roupa japonesa", "Ela vira princesa", "Ela se veste como soldado", "Ela se disfarça de mandrake"],
         "correta": "Ela se veste como soldado",
         "imagem": "https://rollingstone.com.br/wp-content/uploads/mulan_reprod.jpg"
     },
     {
         "pergunta": "Qual desses itens representa melhor a Moana?",
-        "opcoes": ["Oceano e canoa", "Espelho mágico", "Tridente do mar", "Espada e dragão"],
+        "opcoes": ["Oceano e canoa", "concha e areia", "Tridente do mar", "Barco de familia"],
         "correta": "Oceano e canoa",
         "imagem": "https://lumiere-a.akamaihd.net/v1/images/g_moana_09_17699_064f5500_2f9ff275.jpeg"
     },
     {
         "pergunta": "Qual o nome do vilão de A Bela e a Fera?",
-        "opcoes": ["Gaston", "Úrsula", "Jafar", "Malévola"],
+        "opcoes": ["Muzan", "Úrsulo", "Jafar", "Gaston"],
         "correta": "Gaston",
         "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6BaPBq6NNdaYaoypkkPC3knT77xgEz9axww&s"
     },
     {
         "pergunta": "O que Sebastian representa em A Pequena Sereia?",
-        "opcoes": ["Um conselheiro real", "Um peixe curioso", "Um tritão inimigo", "Um pássaro maluco"],
+        "opcoes": ["Um conselheiro real", "Um peixe curioso", "Um tritão inimigo", "Um tubarão maluco"],
         "correta": "Um conselheiro real",
         "imagem": "https://recreio.com.br/wp-content/uploads/disney/sebastiao_capa.png"
     },
@@ -68,7 +68,7 @@ perguntas = [
     },
     {
         "pergunta": "Qual é o animal companheiro da Mulan?",
-        "opcoes": ["Um dragão", "Um tigre", "Um macaco", "Um cachorro"],
+        "opcoes": ["Um Cachorro caramelo", "Um tigre", "Um macaco", "Um dragão"],
         "correta": "Um dragão",
         "imagem": "https://i0.wp.com/cromossomonerd.com.br/wp-content/uploads/2016/10/imagem-destacada-mulan.png?fit=1068%2C600&ssl=1"
     },
@@ -111,7 +111,7 @@ if len(st.session_state.respostas) == len(perguntas) and not st.session_state.ve
 if st.session_state.verificado:
     st.markdown("## ✅ Resultado Final:")
     st.success(f"Você acertou {st.session_state.acertos} de {len(perguntas)} perguntas!")
-    st.error(f"Você errou {st.session_state.erros} perguntas.")
+    st.error(f"Você não é inteligente lhe falta estudo para responder essas {st.session_state.erros} perguntas.")
     st.markdown(f"### 🎯 Pontuação final: **{st.session_state.acertos * 10} pontos**")
 
     if st.button("Refazer o quiz 🔁"):
