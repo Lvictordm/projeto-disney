@@ -36,6 +36,7 @@ def carregar_personagens_famosos():
 # Carrega os personagens mais conhecidos
 todos_personagens = carregar_personagens_famosos()
 
+# Verifica se conseguimos carregar o número suficiente de personagens
 if len(todos_personagens) < 10:
     st.error("Não foi possível carregar personagens suficientes para o quiz.")
     st.stop()
@@ -48,8 +49,17 @@ perguntas = []
 # Criando as perguntas para o quiz
 for personagem in quiz_personagens:
     correta = personagem['name']
-    # Criando opções erradas a partir de outros personagens
-    opcoes_erradas = random.sample([p['name'] for p in todos_personagens if p['name'] != correta], 3)
+    
+    # Garantir que existam pelo menos 3 opções erradas
+    opcoes_erradas = [p['name'] for p in todos_personagens if p['name'] != correta]
+    
+    if len(opcoes_erradas) < 3:
+        st.error("Não há opções erradas suficientes para gerar o quiz.")
+        st.stop()
+    
+    opcoes_erradas = random.sample(opcoes_erradas, 3)
+    
+    # Adiciona a resposta correta às opções e embaralha
     opcoes = opcoes_erradas + [correta]
     random.shuffle(opcoes)  # Embaralha as opções para cada pergunta
 
