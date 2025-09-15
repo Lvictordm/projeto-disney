@@ -5,13 +5,12 @@ st.set_page_config(page_title="Quiz Disney - Pontuação", page_icon="🎯")
 st.title("🎯 Quiz Disney: Quanto você sabe sobre os filmes?")
 st.write("Responda às perguntas e veja sua pontuação no final!")
 
-# Perguntas com resposta correta + imagem de referência
 perguntas = [
     {
         "pergunta": "Quem é o vilão no filme Aladdin?",
         "opcoes": ["Jafar", "Hades", "Gaston", "Úrsula"],
         "correta": "Jafar",
-        "imagem": "https://upload.wikimedia.org/wikipedia/en/1/1e/Jafar_Disney.png"
+        "imagem": "https://imagem.natelinha.uol.com.br/original/Aladdin_88759a66acb08b6f9d2b3f3a411492538d613179.jpeg"
     },
     {
         "pergunta": "O que a Fera veste no baile com a Bela?",
@@ -81,13 +80,12 @@ perguntas = [
     }
 ]
 
-# Inicializar sessão
 if "respostas" not in st.session_state:
     st.session_state.respostas = []
 if "verificado" not in st.session_state:
     st.session_state.verificado = False
 
-# Mostrar perguntas
+
 for i, p in enumerate(perguntas):
     if len(st.session_state.respostas) <= i:
         st.image(p["imagem"], width=250)
@@ -96,7 +94,7 @@ for i, p in enumerate(perguntas):
             st.session_state.respostas.append(escolha)
         st.stop()
 
-# Verificar respostas
+
 if len(st.session_state.respostas) == len(perguntas) and not st.session_state.verificado:
     acertos = 0
     erros = 0
@@ -109,7 +107,7 @@ if len(st.session_state.respostas) == len(perguntas) and not st.session_state.ve
     st.session_state.erros = erros
     st.session_state.verificado = True
 
-# Mostrar resultado final
+
 if st.session_state.verificado:
     st.markdown("## ✅ Resultado Final:")
     st.success(f"Você acertou {st.session_state.acertos} de {len(perguntas)} perguntas!")
