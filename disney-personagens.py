@@ -28,7 +28,7 @@ perguntas = [
         "pergunta": "Qual objeto mágico aparece em Aladdin?",
         "opcoes": ["Tapete voador", "Tridente mágico", "Espada encantada", "Coração de Te Fiti"],
         "correta": "Tapete voador",
-        "imagem": ""
+        "imagem": "https://www.hollywoodreporter.com/wp-content/uploads/2018/07/aladdin_still.jpg?w=1296&h=730&crop=1"
     },
     {
         "pergunta": "Quem é o companheiro de Moana em sua jornada?",
