@@ -49,6 +49,7 @@ perguntas = [
         "imagem": "https://lumiere-a.akamaihd.net/v1/images/g_moana_09_17699_064f5500_2f9ff275.jpeg"
     },
     {
+        "titulo": "EM bla bla"
         "pergunta": "Qual o nome do vilão de A Bela e a Fera?",
         "opcoes": ["Muzan", "Úrsulo", "Jafar", "Gaston"],
         "correta": "Gaston",
@@ -56,7 +57,7 @@ perguntas = [
     },
     {
         "pergunta": "O que Sebastian representa em A Pequena Sereia?",
-        "opcoes": ["Um conselheiro real", "Um peixe curioso", "Um tritão inimigo", "Um tubarão maluco"],
+        "opcoes": ["Um conselheiro real", "Um curioso", "Um inimigo", "Um maluco"],
         "correta": "Um conselheiro real",
         "imagem": "https://recreio.com.br/wp-content/uploads/disney/sebastiao_capa.png"
     },
@@ -111,10 +112,10 @@ if len(st.session_state.respostas) == len(perguntas) and not st.session_state.ve
 if st.session_state.verificado:
     st.markdown("## ✅ Resultado Final:")
     st.success(f"Você acertou {st.session_state.acertos} de {len(perguntas)} perguntas!")
-    st.error(f"Você não é inteligente lhe falta estudo para responder essas {st.session_state.erros} perguntas.")
+    st.error(f"Você não é inteligente, lhe faltou estudo para responder essas {st.session_state.erros} perguntas!")
     st.markdown(f"### 🎯 Pontuação final: **{st.session_state.acertos * 10} pontos**")
 
-    if st.button("Refazer o quiz 🔁"):
+    if st.button("Clica aqui para responder novamente! 🔁"):
         st.session_state.respostas = []
         st.session_state.verificado = False
         st.rerun()
