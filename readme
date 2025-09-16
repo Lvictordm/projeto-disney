@@ -1,8 +1,7 @@
 Quiz Disney
-
 Quiz interativo em Streamlit para testar seus conhecimentos sobre filmes da Disney.
 
-Como usar
+Como usar:
 
 Instale o Streamlit:
 pip install streamlit
@@ -12,10 +11,29 @@ streamlit run seu_arquivo.py
 
 Responda as perguntas e veja sua pontuação no final.
 
-Funcionalidades
+
+
+
+
+Funcionalidades:
 
 Perguntas com imagens dos personagens
 
 Mostra quantas respostas você acertou e errou
 
 Permite refazer o quiz
+
+Geração aleatória de perguntas a cada novo jogo
+
+Interface simples e amigável, feita com Streamlit
+
+Utiliza dados reais da Disney API.
+
+
+
+
+Requisitos
+
+Python 3.8 ou superior
+
+Conexão com a internet (para acessar a API da Disney)
