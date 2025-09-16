@@ -29,7 +29,7 @@ def carregar_todos_personagens(max_personagens=100):
             break
     return personagens[:max_personagens]
 
-# Carrega personagens (até 100)
+
 todos_personagens = carregar_todos_personagens(max_personagens=100)
 
 if len(todos_personagens) < 10:
